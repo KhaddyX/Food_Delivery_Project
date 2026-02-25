@@ -14,27 +14,31 @@ pipeline {
             }
         }
 
-        stage('Compile') {
+        stage('Docker Version') {
             steps {
-                bat "docker version"
+                bat 'docker version'
             }
         }
 
         stage('Unit Test') {
             steps {
-                bat "mvnw.cmd test"
+                dir('foodies_backend') {
+                    bat 'mvnw.cmd test'
+                }
             }
         }
 
         stage('Code Coverage') {
             steps {
-                bat "mvnw.cmd clean verify"
+                dir('foodies_backend') {
+                    bat 'mvnw.cmd clean verify'
+                }
 
                 publishHTML(target: [
                     allowMissing: true,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
-                    reportDir: 'target/site/jacoco',
+                    reportDir: 'foodies_backend/target/site/jacoco',
                     reportFiles: 'index.html',
                     reportName: 'JaCoCo Report'
                 ])
@@ -43,13 +47,15 @@ pipeline {
 
         stage('Static Code Analysis') {
             steps {
-                bat "mvnw.cmd checkstyle:checkstyle"
+                dir('foodies_backend') {
+                    bat 'mvnw.cmd checkstyle:checkstyle'
+                }
 
                 publishHTML(target: [
                     allowMissing: true,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
-                    reportDir: 'target/site',
+                    reportDir: 'foodies_backend/target/site',
                     reportFiles: 'checkstyle.html',
                     reportName: 'Checkstyle Report'
                 ])
@@ -58,19 +64,23 @@ pipeline {
 
         stage('Build Jar') {
             steps {
-                bat "mvnw.cmd clean package -DskipTests"
+                dir('foodies_backend') {
+                    bat 'mvnw.cmd clean package -DskipTests'
+                }
             }
         }
 
         stage('Docker Build') {
             steps {
-                bat "docker build -t foodies_backend ."
+                dir('foodies_backend') {
+                    bat "docker build -t khaddy08/foodies_backend ."
+                }
             }
         }
 
         stage('Docker Push') {
             steps {
-                bat "docker push foodies_backend"
+                bat "docker push khaddy08/foodies_backend"
             }
         }
 
@@ -78,7 +88,7 @@ pipeline {
             steps {
                 bat """
                 docker rm -f foodies_backend || exit 0
-                docker run -d -p 9090:9090 khaddy08 foodies_backend  khaddy08/foodies_backend
+                docker run -d -p 9090:9090 khaddy08 foodies_backend khaddy08/foodies_backend
                 """
             }
         }
