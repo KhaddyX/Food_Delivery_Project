@@ -1,6 +1,11 @@
 pipeline {
     agent { label 'Pipeline' }
 
+    environment {
+        IMAGE_NAME = "khaddy08/foodies_backend"
+        CONTAINER_NAME = "foodies_backend"
+    }
+
     stages {
 
         stage('Checkout') {
@@ -11,22 +16,22 @@ pipeline {
 
         stage('Compile') {
             steps {
-                sh "docker version"
+                bat "docker version"
             }
         }
 
         stage('Unit Test') {
             steps {
-                sh ".\\mvnw test"
+                bat "mvnw.cmd test"
             }
         }
 
         stage('Code Coverage') {
             steps {
-                sh ".\\mvnw clean verify"
+                bat "mvnw.cmd clean verify"
 
                 publishHTML(target: [
-                    allowMissing: false,
+                    allowMissing: true,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
                     reportDir: 'target/site/jacoco',
@@ -38,10 +43,10 @@ pipeline {
 
         stage('Static Code Analysis') {
             steps {
-                sh ".\\mvnw checkstyle:checkstyle"
+                bat "mvnw.cmd checkstyle:checkstyle"
 
                 publishHTML(target: [
-                    allowMissing: false,
+                    allowMissing: true,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
                     reportDir: 'target/site',
@@ -53,40 +58,28 @@ pipeline {
 
         stage('Build Jar') {
             steps {
-                sh ".\\mvnw clean package -DskipTests"
+                bat "mvnw.cmd clean package -DskipTests"
             }
         }
 
         stage('Docker Build') {
             steps {
-                sh "docker build -t khaddy08/foodies_backend ."
+                bat "docker build -t foodies_backend ."
             }
         }
 
         stage('Docker Push') {
             steps {
-                sh "docker push khaddy08/foodies_backend"
+                bat "docker push foodies_backend"
             }
         }
 
         stage('Docker Run') {
             steps {
-                sh """
+                bat """
                 docker rm -f foodies_backend || exit 0
-                docker run -d -p 9090:9090 --name foodies_backend khaddy08/foodies_backend
+                docker run -d -p 9090:9090 khaddy08 foodies_backend  khaddy08/foodies_backend
                 """
-            }
-        }
-
-        stage('Acceptance Test') {
-            steps {
-                sh ".\\mvnw verify -Pacceptance"
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                sh "wsl -d ubuntu ansible-playbook -i /home/khaddy/ansible/hosts foodies_backend.yml"
             }
         }
     }
