@@ -1,5 +1,7 @@
 HELP.md
 
+# Maven / Java build output
+target/
 
 ### STS ###
 .apt_generated
