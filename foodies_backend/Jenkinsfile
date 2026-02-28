@@ -77,10 +77,17 @@ pipeline {
                 }
             }
         }
+//         stage('Docker Login') {
+//             steps {
+//                 bat 'docker login -u khaddy08 -p Khaddy2$'
+//             }
+//         }
 
 stage('Docker Push') {
     steps {
-        bat "docker push khaddy08/foodies_backend"
+        catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
+            bat "docker push khaddy08/foodies_backend"
+        }
     }
 }
 
@@ -88,7 +95,8 @@ stage('Docker Run') {
     steps {
         bat """
         docker rm -f foodies_backend || exit 0
-        docker run -d -p 9090:9090 --name foodies_backend khaddy08/foodies_backend
+        docker run -d -p 9090:9090 khaddy08/foodies_backend
+
         """
     }
 }
