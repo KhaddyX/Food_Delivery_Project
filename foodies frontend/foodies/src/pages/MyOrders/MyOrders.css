@@ -1,0 +1,224 @@
+.my-orders-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.orders-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.orders-header {
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #fd590d 0%, #fd590d 100%);
+  color: white;
+}
+
+.orders-header h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.orders-header p {
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+.empty-orders {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 120px;
+  opacity: 0.8; /* Slightly increased opacity for better visibility */
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease; /* Smooth transition for hover */
+}
+
+.empty-icon:hover {
+  transform: scale(1.1); /* Subtle scale on hover */
+}
+
+.empty-orders h3 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.empty-orders p {
+  color: #6c757d;
+}
+
+.orders-table-container {
+  overflow-x: auto;
+  padding: 0 1rem 1.5rem;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 1rem;
+}
+
+.orders-table th {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #495057;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.order-row {
+  transition: all 0.2s ease;
+}
+
+.order-row:hover {
+  background-color: #f8f9fa;
+}
+
+.order-row td {
+  padding: 1.2rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+}
+
+.order-items {
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.order-total {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.item-count {
+  font-weight: 500;
+  color: #495057;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  transition: transform 0.2s ease; /* Added for subtle hover effect */
+}
+
+.status-badge:hover {
+  transform: scale(1.05); /* Slight scale on hover */
+}
+
+.status-badge.delivered {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-badge.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.status-icon {
+  margin-right: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.refresh-btn {
+  background: none;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.refresh-btn:hover {
+  background-color: #f8f9fa;
+  border-color: #fd590d;
+  color: #fd590d;
+  transform: scale(1.05); /* Subtle scale on hover */
+}
+
+.refresh-icon {
+  margin-right: 0.5rem;
+}
+
+/* Animations */
+  /* @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+  }
+  .animate-bounce {
+    animation: bounce 1s ease-in-out infinite;
+  } */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 2s linear infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .orders-header {
+    padding: 1.2rem 1.5rem;
+  }
+
+  .orders-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .order-row td {
+    padding: 0.8rem 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .status-badge {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .refresh-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .empty-icon {
+    width: 100px; /* Smaller icon on mobile */
+  }
+}

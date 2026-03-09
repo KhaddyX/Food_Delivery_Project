@@ -1,0 +1,123 @@
+.landing-page {
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #fff7ef 0%, #fff1e3 45%, #ffffff 100%);
+  color: #1a1a1a;
+}
+
+.landing-eyebrow {
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ff6b1a;
+}
+
+.landing-hero {
+  animation: heroFadeIn 0.8s ease-out both;
+}
+
+.landing-btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.landing-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.landing-hero-card {
+  position: relative;
+  width: min(420px, 80vw);
+  height: min(420px, 80vw);
+  margin: 0 auto;
+  border-radius: 32px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.landing-hero-badge {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: #ff6b1a;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  box-shadow: 0 12px 20px rgba(255, 107, 26, 0.25);
+}
+
+.landing-hero-circle {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff9d5c, #ff6b1a);
+  animation: float 4s ease-in-out infinite;
+}
+
+.landing-hero-circle-secondary {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  top: 60px;
+  right: 40px;
+  background: linear-gradient(135deg, #ffe2c5, #ffc08e);
+  animation-delay: 0.6s;
+}
+
+.landing-hero-circle-tertiary {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  bottom: 40px;
+  left: 60px;
+  background: linear-gradient(135deg, #ffb07a, #ff7a2b);
+  animation-delay: 1.2s;
+}
+
+.landing-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fffaf4;
+}
+
+.footer-link {
+  color: #1a1a1a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-link:hover {
+  color: #ff6b1a;
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-hero-card {
+    width: min(320px, 90vw);
+    height: min(320px, 90vw);
+  }
+}
