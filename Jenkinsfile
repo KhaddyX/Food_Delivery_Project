@@ -5,7 +5,7 @@ pipeline {
         DOCKER_HUB_USER = 'khaddy08'
         BACKEND_IMAGE   = "${DOCKER_HUB_USER}/foodies_backend"
         FRONTEND_IMAGE  = "${DOCKER_HUB_USER}/foodies-frontend"
-        ADMIN_IMAGE     = "${DOCKER_HUB_USER}/foodies-admin"
+        ADMIN_IMAGE     = "${DOCKER_HUB_USER}/adminpanel"
         APP_PORT        = '9090'
     }
 
@@ -13,7 +13,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/KhaddyX/food-delivery-project.git', branch: 'main'
+                git url: 'https://github.com/KhaddyX/Food_Delivery_Project.git', branch: 'main'
             }
         }
 
