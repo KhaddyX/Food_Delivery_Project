@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+
+  backend:
+    image: khaddy08/foodies_backend:v1
+    container_name: foodies-backend
+    ports:
+      - "8080:8080"
+    restart: always
+
+  frontend:
+    image: foodies-frontend:v1
+    container_name: foodies-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: always
+
+  admin:
+    image: foodies-admin:v1
+    container_name: foodies-admin
+    ports:
+      - "3001:80"
+    depends_on:
+      - backend
+    restart: always
